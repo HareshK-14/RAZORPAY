@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+    margin: 0; padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white border border-slate-200/90 rounded-2xl shadow-sm;
+  }
+  .card-hover {
+    @apply card hover:border-slate-300 hover:shadow-md transition-all duration-200;
+  }
+  .card-sm {
+    @apply bg-slate-50/80 border border-slate-200 rounded-xl;
+  }
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-blue-500/20 text-sm;
+  }
+  .btn-secondary {
+    @apply bg-white hover:bg-slate-50 text-slate-700 font-medium px-4 py-2 rounded-xl transition-colors duration-200 border border-slate-300 shadow-sm text-sm;
+  }
+  .btn-ghost {
+    @apply text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium px-3 py-2 rounded-xl transition-colors duration-200 text-sm;
+  }
+  .badge-critical {
+    @apply bg-red-50 text-red-700 border border-red-200 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide;
+  }
+  .badge-high {
+    @apply bg-orange-50 text-orange-700 border border-orange-200 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide;
+  }
+  .badge-medium {
+    @apply bg-amber-50 text-amber-700 border border-amber-200 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide;
+  }
+  .badge-low {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide;
+  }
+  .input-field {
+    @apply bg-white border border-slate-300 text-slate-900 rounded-xl px-4 py-2.5 w-full
+           focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100
+           transition-all placeholder-slate-400 text-sm shadow-sm;
+  }
+  .label {
+    @apply text-slate-700 text-xs font-semibold mb-1.5 block;
+  }
+  .stat-value {
+    @apply text-2xl font-extrabold text-slate-900;
+  }
+  .stat-label {
+    @apply text-slate-500 text-xs font-medium;
+  }
+  .section-title {
+    @apply text-xs font-bold text-slate-700 uppercase tracking-widest;
+  }
+  .page-container {
+    @apply p-6 space-y-6 max-w-[1600px];
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.25s ease-out; }
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.slide-in-right { animation: slideInRight 0.3s ease-out; }
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.slide-in-up { animation: slideInUp 0.3s ease-out; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 8px;
+}
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Drawer overlay */
+.drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+}
+.drawer-panel {
+  position: fixed; right: 0; top: 0; bottom: 0;
+  width: 560px; max-width: 95vw;
+  background: #ffffff;
+  border-left: 1px solid #e2e8f0;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+  z-index: 101;
+  overflow-y: auto;
+  animation: slideInRight 0.25s ease-out;
+}
+
+/* Table row hover */
+.table-row-hover:hover { background: #f8fafc; }
