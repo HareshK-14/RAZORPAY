@@ -32,6 +32,7 @@ import {
   Sliders,
   Check,
   ShieldCheck,
+  ShieldAlert,
   AlertCircle,
   FileText,
   ChevronRight,
@@ -124,7 +125,7 @@ export default function Dashboard() {
           <AlertTriangle className="w-8 h-8 text-rose-500 mx-auto mb-3" />
           <p className="text-rose-800 font-semibold">Failed to load dashboard</p>
           <p className="text-slate-600 text-sm mt-1">{error}</p>
-          <p className="text-slate-500 text-xs mt-2">Make sure the backend is running on port 5000.</p>
+          <p className="text-slate-500 text-xs mt-2">Make sure the backend is running on port 8000 (python app.py).</p>
         </div>
       </div>
     );
@@ -238,6 +239,34 @@ export default function Dashboard() {
           </button>
         </div>
       )}
+
+      {/* PS06 Banking Risk Investigation Assistant Banner */}
+      <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 rounded-2xl p-5 text-white shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-white/20 text-white border border-white/30 uppercase tracking-wider">
+              NexusTiq24 • TRACK_ID=PS06
+            </span>
+            <span className="text-xs text-blue-100 font-medium">
+              Banking: Transaction Risk Investigation Assistant
+            </span>
+          </div>
+          <h2 className="text-lg font-bold text-white">
+            &quot;Find the pattern. Show the evidence. Keep the decision human.&quot;
+          </h2>
+          <p className="text-xs text-blue-100 max-w-2xl">
+            Evaluate customer multi-month baselines, isolate unusual behavioral shifts, verify court-defensible deterministic rule citations, and access grounded Gemini AI case briefings.
+          </p>
+        </div>
+        <button
+          onClick={() => navigate('/customer-investigation')}
+          className="px-4 py-2.5 rounded-xl bg-white text-blue-700 hover:bg-blue-50 font-bold text-xs flex items-center gap-2 shadow-xs flex-shrink-0 transition-all cursor-pointer"
+        >
+          <ShieldAlert className="w-4 h-4 text-blue-600" />
+          <span>Launch Customer Investigation</span>
+          <ChevronRight className="w-4 h-4 text-blue-500" />
+        </button>
+      </div>
 
       {/* DEDICATED ROLE DASHBOARD VIEW */}
       {currentRole === 'Administrator' && (

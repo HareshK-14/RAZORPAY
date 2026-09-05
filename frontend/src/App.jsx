@@ -6,6 +6,7 @@ import Header from './components/Header';
 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import CustomerInvestigation from './pages/CustomerInvestigation';
 import Analyze from './pages/Analyze';
 import Review from './pages/Review';
 import AuditPage from './pages/AuditPage';
@@ -34,9 +35,15 @@ export default function App() {
       <AuthProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<Navigate to="/customer-investigation" replace />} />
 
           {/* Accessible by all 3 roles: Administrator, Risk Analyst, Reviewer */}
+          <Route path="/customer-investigation" element={
+            <ProtectedRoute allowedRoles={['Administrator', 'Risk Analyst', 'Reviewer']}>
+              <AppShell><CustomerInvestigation /></AppShell>
+            </ProtectedRoute>
+          } />
+
           <Route path="/dashboard" element={
             <ProtectedRoute allowedRoles={['Administrator', 'Risk Analyst', 'Reviewer']}>
               <AppShell><Dashboard /></AppShell>

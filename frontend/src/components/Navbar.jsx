@@ -3,10 +3,11 @@ import { useAuth } from '../context/AuthContext';
 import {
   Shield, LayoutDashboard, Search, ClipboardList, FileText,
   BarChart2, Settings, LogOut, User, Activity, ChevronRight,
-  Users as UsersIcon
+  Users as UsersIcon, ShieldAlert
 } from 'lucide-react';
 
 const allNavItems = [
+  { to: '/customer-investigation', label: 'Customer Investigation', icon: ShieldAlert, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },
   { to: '/analyze', label: 'Analyze Transaction', icon: Search, roles: ['Administrator', 'Risk Analyst'] },
   { to: '/review', label: 'Review Queue', icon: ClipboardList, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },

@@ -78,3 +78,18 @@ export async function getUsers() {
   const res = await api.get('/users');
   return res.data;
 }
+
+export async function getCustomers() {
+  const res = await api.get('/customers');
+  return res.data;
+}
+
+export async function getCustomerInvestigation(customerId) {
+  const res = await api.get(`/investigate/${customerId}`);
+  return res.data;
+}
+
+export async function investigateCustomPayload(data) {
+  const res = await api.post('/investigate', data);
+  return res.data;
+}
