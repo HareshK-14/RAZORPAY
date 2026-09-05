@@ -1,12 +1,14 @@
-﻿"""
+"""
 SQLite Database Module for Track PS06 (using Python standard library sqlite3)
 NexusTiq24 — Banking: Transaction Risk Investigation Assistant
 """
 
 import sqlite3
 import os
-import json
-from synthetic_data_ps06 import generate_multi_month_history
+try:
+    from backend.synthetic_data_ps06 import generate_multi_month_history
+except ImportError:
+    from synthetic_data_ps06 import generate_multi_month_history
 
 DB_DIR = os.path.join(os.path.dirname(__file__), "..", "database")
 DB_PATH = os.path.join(DB_DIR, "transactionguard.db")

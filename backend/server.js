@@ -10,6 +10,7 @@ const auditRoute = require('./routes/audit');
 const reviewRoute = require('./routes/review');
 const analyticsRoute = require('./routes/analytics');
 const notificationsRoute = require('./routes/notifications');
+const investigateRoute = require('./routes/investigate');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -121,6 +122,11 @@ app.use('/api/audit', auditRoute);
 app.use('/api/reviews', reviewRoute);
 app.use('/api/analytics', analyticsRoute);
 app.use('/api/notifications', notificationsRoute);
+app.use('/api/investigate', investigateRoute);
+app.get('/api/customers', (req, res, next) => {
+  req.url = '/customers';
+  investigateRoute(req, res, next);
+});
 
 // 404
 app.use((req, res) => {
