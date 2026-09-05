@@ -17,6 +17,12 @@ import hashlib
 import datetime
 from typing import Optional, List, Dict, Any
 
+# Windows subprocess stdout UTF-8 encoding support
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
+
 from fastapi import FastAPI, HTTPException, Query, Request, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -770,8 +776,8 @@ if os.path.exists(FRONTEND_DIST):
 
 if __name__ == "__main__":
     print("=" * 65)
-    print("🚀 Starting TransactionGuard AI — PS06 Banking Risk Investigation Assistant")
-    print(f"📡 Serving on http://localhost:8000")
-    print(f"🔑 Gemini API Key configured: {'YES' if get_gemini_api_key() else 'NO (Deterministic Fallback Active)'}")
+    print("[STARTING] TransactionGuard AI -- PS06 Banking Risk Investigation Assistant")
+    print("  Serving on: http://localhost:8000")
+    print(f"  Gemini API Key configured: {'YES' if get_gemini_api_key() else 'NO (Deterministic Fallback Active)'}")
     print("=" * 65)
     uvicorn.run(app, host="0.0.0.0", port=8000)
