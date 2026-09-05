@@ -9,8 +9,8 @@ import {
 const allNavItems = [
   { to: '/customer-investigation', label: 'Customer Investigation', icon: ShieldAlert, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },
-  { to: '/analyze', label: 'Analyze Transaction', icon: Search, roles: ['Administrator', 'Risk Analyst'] },
-  { to: '/review', label: 'Review Queue', icon: ClipboardList, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },
+  { to: '/analyze', label: 'Investigate Transaction', icon: Search, roles: ['Administrator', 'Risk Analyst'] },
+  { to: '/review', label: 'Investigation Queue', icon: ClipboardList, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },
   { to: '/transactions', label: 'Transactions', icon: Activity, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },
   { to: '/audit', label: 'Audit Trail', icon: FileText, roles: ['Administrator', 'Risk Analyst', 'Reviewer'] },
   { to: '/analytics', label: 'Analytics', icon: BarChart2, roles: ['Administrator', 'Risk Analyst'] },
@@ -48,8 +48,8 @@ export default function Navbar() {
             <Shield className="w-5 h-5" />
           </div>
           <div>
-            <div className="font-bold text-slate-900 text-sm leading-tight">TransactionGuard</div>
-            <div className="text-blue-600 text-xs font-bold">AI Risk Manager</div>
+            <div className="font-bold text-slate-900 text-sm leading-tight">TransactionGuard AI</div>
+            <div className="text-blue-600 text-[11px] font-bold">Banking Risk Assistant</div>
           </div>
         </div>
         <div className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">

@@ -21,12 +21,13 @@ import {
 import axios from 'axios';
 
 const PAGE_TITLES = {
+  '/customer-investigation': 'Customer Transaction Risk Investigation',
   '/dashboard': 'Dashboard Overview',
-  '/analyze': 'Analyze Transaction',
-  '/review': 'Review Queue',
+  '/analyze': 'Investigate Transaction',
+  '/review': 'Investigation Queue',
   '/transactions': 'Transactions Database',
   '/audit': 'Audit Trail & Compliance',
-  '/analytics': 'Risk Analytics & Intelligence',
+  '/analytics': 'Risk Investigation Analytics',
   '/settings': 'Platform Settings',
   '/users': 'User & Access Management'
 };
@@ -156,7 +157,7 @@ export default function Header() {
       <div className="flex-1 flex items-center gap-3">
         <div>
           <h1 className="text-lg font-semibold text-slate-900 leading-tight">{title}</h1>
-          <p className="text-xs text-slate-500 font-mono">DEFENSE-ONLY RISK INTELLIGENCE</p>
+          <p className="text-xs text-slate-500 font-medium">Banking Risk Investigation Assistant • "Find the pattern. Show the evidence. Keep the decision human."</p>
         </div>
 
         {/* Clickable Role Switcher Pill */}

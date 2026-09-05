@@ -351,9 +351,9 @@ function AdminDashboardView({ metrics: m, health, txns, loading, navigate, onSel
         />
         <StatCard
           loading={loading}
-          label="Fraud Prevented"
+          label="At-Risk Volume Evaluated"
           value="₹38.4 L"
-          sub="90 high-risk interventions"
+          sub="90 elevated risk interventions"
           icon={Lock}
           color="green"
           onClick={() => navigate('/transactions?risk_level=HIGH')}
@@ -646,10 +646,10 @@ function AnalystDashboardView({ metrics: m, health, txns, loading, navigate, onS
         />
         <StatCard
           loading={loading}
-          label="Attack Vectors Active"
-          value="3 Vectors"
-          sub="Velocity, Tor/VPN, Emulators"
-          icon={Flame}
+          label="Risk Patterns Active"
+          value="6 Rules"
+          sub="Evaluated against PS06 matrix"
+          icon={Layers}
           color="purple"
           onClick={() => navigate('/analytics')}
         />
