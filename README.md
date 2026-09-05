@@ -1,179 +1,178 @@
-﻿# 🛡️ TransactionGuard AI
+# TRACK_ID=PS06
 
-> **"Explain Every Risk. Trust Every Decision."**
+# 🛡️ TransactionGuard AI
+### Banking: Transaction Risk Investigation Assistant
 
-**Razorpay AI Buildathon 2026 — Track 2: AI Risk Manager**
+> *"Find the pattern. Show the evidence. Keep the decision human."*
 
-A defense-only payment transaction risk intelligence platform that analyzes synthetic transactions, scores multi-dimensional risk vectors, explains every contributing factor, and empowers human reviewers with actionable decision support.
-
----
-
-## 🏛️ Executive Summary
-
-TransactionGuard AI is an explainable payment risk management system engineered for high-throughput fintech payment infrastructure.
-
-Unlike opaque "black-box" fraud scoring tools that simply output binary decisions without justification, TransactionGuard AI follows a strict **defense-only intelligence lifecycle**:
-
-```
-DETECT → UNDERSTAND → COMPARE → EXPLAIN → SIMULATE → REVIEW → AUDIT
-```
-
-The system evaluates payment telemetry across 5 core biometric and behavioural dimensions, quantifies behavioral anomalies against historical customer baselines, generates counterfactual explanations ("What changes would make this transaction safe?"), and logs every decision into a cryptographically sealed audit ledger.
+[![Competition Track](https://img.shields.io/badge/Competition_Track-NexusTiq24_PS06-blue.svg)](https://github.com/HareshK-14/RAZORPAY)
+[![Execution Model](https://img.shields.io/badge/Run_Command-python_app.py-emerald.svg)](https://github.com/HareshK-14/RAZORPAY)
+[![Port](https://img.shields.io/badge/Single_Port-8000-purple.svg)](http://localhost:8000)
+[![Defense-Only AI](https://img.shields.io/badge/Safety-Defense--Only_AI-indigo.svg)](https://github.com/HareshK-14/RAZORPAY)
+[![Gemini Grounding](https://img.shields.io/badge/Gemini-Zero_Hallucination_Fallback-amber.svg)](https://github.com/HareshK-14/RAZORPAY)
 
 ---
 
-## ⚠️ Defense-Only Compliance Declaration
+## 🏛️ Executive Summary & Primary Objective
 
-> **"The system is designed exclusively for fraud detection, risk assessment, explanation, and human-review assistance. It does not automatically block, reverse, cancel, drop, or execute payment actions. It provides intelligence and decision support to authorized human reviewers."**
+**TransactionGuard AI** is a specialized banking transaction risk investigation assistant built for **NexusTiq24 Problem Statement PS06: Banking - Transaction Risk Investigation Assistant**.
 
-TransactionGuard AI adheres strictly to the Razorpay AI Buildathon Track 2 safety mandate. Automated execution of transactions is completely avoided; the engine serves as an advisory co-pilot for fraud analysts, risk reviewers, and platform administrators.
+In modern banking operations, fraud analysts and human reviewers are overwhelmed by millions of daily transactions. Opaque machine learning models output arbitrary risk numbers without evidence or justification, creating "alert fatigue" and legal liabilities.
 
----
+TransactionGuard AI solves this by operating as a **court-defensible, human-in-the-loop investigation assistant**. It answers one primary question unequivocally:
 
-## 🏗️ System Architecture
-
-```mermaid
-flowchart TD
-    subgraph Client["Frontend Layer (React 18 + Vite + Tailwind)"]
-        UI[Role-Tailored Dashboards\nAdmin • Analyst • Reviewer]
-        AN[Risk Analyzer &\nWhat-If Simulator]
-        TX[Transactions View &\nComparison Matrix]
-        RQ[Human Review Queue\nCase Management]
-        AL[Audit Trail &\nIntegrity Ledger]
-        AY[Analytics, Confusion Matrix\n& Circadian Heatmap]
-    end
-
-    subgraph Server["Backend Layer (Node.js + Express)"]
-        API[Universal REST API Router]
-        RE[Multi-Signal Hybrid Risk Engine]
-        EX[Explainability & Counterfactual Engine]
-        NT[Live Notification Dispatcher]
-    end
-
-    subgraph Storage["Persistence Layer (SQLite)"]
-        DB[(node:sqlite Native Engine)]
-        T1[transactions Table]
-        T2[risk_results Table]
-        T3[reviews Table & Notes]
-        T4[audit_logs Ledger]
-    end
-
-    UI --> API
-    AN --> API
-    TX --> API
-    RQ --> API
-    AL --> API
-    AY --> API
-
-    API --> RE
-    RE --> EX
-    RE --> NT
-    RE --> DB
-    EX --> DB
-```
+> ### **"Does anything in this customer's transaction history need attention?"**
+> - **`YES — INVESTIGATION RECOMMENDED`** (Surfaces exact pattern shifts, triggered rules, and court-admissible evidence chains)
+> - **`NO SIGNIFICANT UNUSUAL ACTIVITY`** (Confirms customer activity conforms to historical 90-day baseline norms)
 
 ---
 
-## 🌟 16 Core Innovations Built
+## ⚠️ Core Defensibility & Safety Mandate
 
-| # | Innovation Module | Capability Description |
-|---|---|---|
-| 1 | **Behavioral DNA Radar** | 5-axis visualization contrasting current transaction telemetry with historical baseline profile |
-| 2 | **What-If Risk Simulator** | Interactive slider sandbox recalculating score deltas live without executing payment changes |
-| 3 | **Counterfactual Engine** | Computes minimal parameter adjustments required to transition High/Critical risk into Low risk |
-| 4 | **Risk Network Graph** | Canvas graph connecting transaction nodes to linked cards, devices, and merchant nodes |
-| 5 | **Evidence Chain** | Chronological timeline of biometric and network telemetry supporting the risk evaluation |
-| 6 | **Circadian Risk Heatmap** | 24 Hours × 4 Severity Tiers (Low, Med, High, Crit) temporal distribution grid |
-| 7 | **Confusion Matrix & Precision-Recall** | Ground-truth benchmark calculating True/False Positives, Precision, Recall, and F1-Score |
-| 8 | **Transaction Comparison** | Side-by-side modal comparing 2 selected transactions with signal divergence highlights |
-| 9 | **Audit Integrity Checksum** | Cryptographically sealed audit log with deterministic state root (`● VERIFIED` badge) |
-| 10 | **Role-Tailored Dashboards** | 3 customized perspectives for Administrator (KPIs), Analyst (Threats), and Reviewer (Triage) |
-| 11 | **Urgent Triage Notification Routing** | Header notification bell navigating directly to target review cases with pre-filtered search |
-| 12 | **Interactive Metric Cards** | StatCards with contextual hover cues and direct navigation into filtered transaction views |
-| 13 | **Case Management Workflow** | Human review ticketing with `CASE-2026-XXXX`, reviewer notes persistence, and dispositions |
-| 14 | **Dynamic AI Risk Brief** | Autonomous executive risk summary synthesizing high-frequency anomalies and merchant spikes |
-| 15 | **Graceful Fallback Mode** | Evaluates partial payloads safely with Data Quality Score and explicit limited-data indicators |
-| 16 | **Quick/Detailed Intelligence Switch** | Dual-mode inspector for rapid executive screening or deep forensic signal breakdown |
+> ### **NEVER ASSERT FRAUD**
+> **"The system is designed exclusively for behavioral anomaly detection, risk assessment, explanation, and human-review assistance. It NEVER asserts that 'fraud has occurred' or that a customer is guilty. It surfaces mathematical departures, extracts evidence, cites deterministic banking rules, and reserves final judgment strictly for authorized human investigators."**
 
 ---
 
-## 📊 Risk Engine & Scoring Framework
+## 🚀 Quickstart for Evaluation Judges
 
-### Scoring Dimensions (0–100 Scale)
+The entire platform is self-contained. The evaluation judge runs **only two commands** in a single terminal. **No Node.js or second terminal is required by the judge**.
 
-| Telemetry Signal | Weight | Baseline Normal | Anomaly Condition |
-|---|---|---|---|
-| **Transaction Velocity** | 25% | ≤ 3 tx / hour | High burst rate (e.g. 7–15 tx/hr) |
-| **Geolocation Mismatch** | 25% | Domestic origin | IP Country ≠ Merchant Country or high-risk IP |
-| **Hardware Device Trust** | 20% | Enrolled device | Unrecognized hardware ID, Tor proxy, emulator |
-| **Circadian Time Anomaly** | 15% | 06:00–23:00 | Off-hours payment spike (01:00–05:00) |
-| **Amount vs 30d Average** | 15% | 0.5×–2.0× average | Extreme outlier (>5× historical baseline) |
-
-### Risk Tiers & Defense Guidance
-
-- 🟢 **LOW (0–24)**: Pass friction-free. Normal domestic behavior.
-- 🟡 **MEDIUM (25–49)**: Step-up authentication advisory (e.g., recommend biometric/OTP verification).
-- 🟠 **HIGH (50–74)**: Route to Human Review Queue. Detailed explanation provided to reviewer.
-- 🔴 **CRITICAL (75–100)**: Immediate manual triage required. Suspended payout pending reviewer sign-off.
-
----
-
-## ⚡ Pre-Loaded Buildathon Test Cases
-
-| Scenario | Payload Profile | Primary Anomaly | Expected Outcome |
-|---|---|---|---|
-| **TX-DEMO-001** | ₹42,500, Velocity: 9/hr, IP: RU, Device: DEV-NEW-001 | Velocity burst + Geo mismatch + New device | **CRITICAL (90+)**, Flagged |
-| **TX-DEMO-002** | ₹1,200, Velocity: 1/hr, IP: IN, Device: DEV-KNOWN-001 | Within historical average, domestic, trusted device | **LOW (<20)**, Clean pass |
-| **TX-DEMO-003** | ₹18,500, Velocity: 7/hr, IP: IN, Device: Known | Nighttime velocity burst (23:00) | **MEDIUM (40–55)**, Step-up |
-| **TX-DEMO-004** | ₹98,000, Velocity: 4/hr, IP: NL, Device: DEV-TOR-PROXY | Tor exit node + 15× amount outlier | **CRITICAL (95+)**, Immediate triage |
-
----
-
-## 🚀 Quick Start Guide
-
-### Prerequisites
-- Node.js 22.5+ (features native `node:sqlite` engine)
-- npm
-
-### Installation & Launch
-
+### 1. Installation
 ```bash
-# Clone repository
-git clone <repo-url>
-cd TransactionGuard
-
-# Install root, backend, and frontend dependencies
-npm install
-npm --prefix backend install
-npm --prefix frontend install
-
-# Launch backend and frontend concurrently
-npm run dev
+pip install -r requirements.txt
 ```
 
-- **Frontend Client**: `http://localhost:5173` (or `5174`)
-- **Backend API**: `http://localhost:5000`
-- **Health Check**: `http://localhost:5000/api/health`
-
----
-
-## 🧪 Verification & Production Build
-
-The frontend builds cleanly with Vite:
-
+### 2. Execution
 ```bash
-cd frontend
-npm run build
-# ✓ 2344 modules transformed.
-# ✓ built in 8.8s
+python app.py
 ```
 
-All backend endpoints use zero external SQLite driver binaries, ensuring 100% cross-platform portability across Windows, Linux, and macOS via Node.js native SQLite.
+Open your browser to:
+```
+http://localhost:8000
+```
+
+> **Single-Port Architecture**: Python FastAPI serves both the high-performance REST APIs (`/api/*`) and the compiled production frontend (`frontend/dist/index.html`) on `http://localhost:8000`.
+
+### Optional Gemini Configuration
+If you have a Google Gemini API Key:
+```bash
+# Windows PowerShell
+$env:GEMINI_API_KEY="your_api_key_here"
+
+# Linux / macOS
+export GEMINI_API_KEY="your_api_key_here"
+```
+> **Graceful Fallback**: If `GEMINI_API_KEY` is not provided or network access is restricted, the engine automatically switches to its **100% deterministic rule-grounded narrative engine** with zero degradation in analytical depth or uptime.
 
 ---
 
-## 🛡️ Hackathon Submission Details
-- **Buildathon**: Razorpay AI Buildathon 2026
-- **Track**: Track 2 — AI Risk Manager
-- **Product**: TransactionGuard AI
-- **Tagline**: *"Explain Every Risk. Trust Every Decision."*
+## 🧠 The 6 Deterministic PS06 Risk Rules
+
+Every customer transaction is evaluated against 6 deterministic banking rules codified with mathematical thresholds in `data/investigation_rules.md`:
+
+| Rule ID | Rule Name | Core Category | Deterministic Detection Threshold |
+|---|---|---|---|
+| **RULE_PS06_01** | **New Payee Velocity Spike** | Beneficiary Exposure | $\ge 2$ transfers to previously unseen payees within 24 hours OR $\ge 3	imes$ daily transaction burst to a new beneficiary. |
+| **RULE_PS06_02** | **Sudden High-Value Deviation** | Amount Divergence | Transaction amount $> (	ext{Mean}_{90	ext{d}} + 3 	imes 	ext{StdDev}_{90	ext{d}})$ AND amount $> ₹50,000$. |
+| **RULE_PS06_03** | **Atypical Nocturnal Activity** | Circadian Anomaly | Transaction executed between 23:00 and 06:00 for a customer whose baseline nocturnal activity is $< 5\%$. |
+| **RULE_PS06_04** | **Rapid Channel Switching** | Payment Channel | Sudden departure into an unused channel (e.g. Wire Transfer/ATM) for an amount $> 2	imes$ historical average. |
+| **RULE_PS06_05** | **Dormant Account Sudden Reactivation**| Account Velocity | Account inactive for $> 45$ days immediately executing high-velocity or high-value outbound transfers. |
+| **RULE_PS06_06** | **Structuring / Smurfing Pattern** | AML Regulatory | $\ge 3$ consecutive transactions within 12 hours sized just below standard reporting thresholds ($₹45,000 - ₹49,999$). |
+
+---
+
+## 📊 Synthetic Benchmark Dataset & Case Breakdown
+
+TransactionGuard AI includes a pre-seeded multi-month banking dataset (`backend/synthetic_data_ps06.py`) featuring 8 customer profiles and over 340 realistic transactions across 90-day baselines:
+
+### 1. Standard Benchmark Cases
+- **`CUST-NORMAL-001` (Normal Retail Customer)**
+  - 45 daily retail transactions (UPI, grocery, utilities, standard hours).
+  - **Verdict**: `NO SIGNIFICANT UNUSUAL ACTIVITY` (0 rules triggered).
+- **`CUST-RISK-001` (High-Risk Difficult Case)**
+  - Established salaried baseline followed by an overnight burst to 2 new beneficiaries (`Beneficiary_X_482`, `Mule_Acct_910`) totaling ₹2,85,000 via IMPS.
+  - **Verdict**: `YES — INVESTIGATION RECOMMENDED` (5 rules triggered: RULE_PS06_01, 02, 03, 04, 06). Isolates transactions `TX1001`, `TX1002`, `TX1003`.
+
+### 2. Difficult & Ambiguous Real-World Banking Scenarios
+- **`CUST-AMBIG-001` (Case A: Large Monthly Commercial Lease)**
+  - Legitimate recurring commercial lease payment occurring on the 1st of the month.
+- **`CUST-AMBIG-002` (Case B: High-Frequency Metro Transit Micropayments)**
+  - Rapid series of sub-₹100 transit NFC taps during peak commuting hours.
+- **`CUST-AMBIG-003` (Case C: International SaaS Cloud Subscription)**
+  - USD denominated corporate cloud hosting charge billed periodically.
+- **`CUST-AMBIG-004` (Case D: Overnight Emergency Pharmacy POS)**
+  - Atypical 02:30 AM transaction at a registered hospital/pharmacy POS terminal during a medical emergency.
+
+---
+
+## 🧩 Comprehensive Feature Matrix (12 Investigation Views)
+
+The **Customer Investigation** module (`/customer-investigation`) equips human reviewers with 12 interconnected analytical panels:
+
+1. **Investigation Summary & Posture**: Instant determination of whether customer history requires attention.
+2. **Isolated Flagged Transactions**: Exact identification of anomalous transactions with amount divergence ratios.
+3. **Customer Behavioral DNA**: Side-by-side comparison of 90-day baseline vs. recent window (amount mean/std, daily velocity, nocturnal ratio, channel distribution).
+4. **Pattern Shift Timeline**: Chronological event mapping marking the precise moment customer behavior diverged.
+5. **Deterministic Rules Evaluation**: Full breakdown of all 6 PS06 rules with thresholds and pass/fail states.
+6. **Court-Admissible Evidence Chain**: Step-by-step audit trail linking historical baseline norms to anomalous deltas.
+7. **Grounded Gemini AI Briefing**: Zero-hallucination natural language executive summary citing verified transaction IDs and amounts.
+8. **Investigator Inquiry Protocol**: Pre-formulated targeted interview questions for customer phone verification.
+9. **Activity Relationship Map**: Visual graph of funds flow across counterparties, payees, and channels.
+10. **Counterfactual Analysis**: Mathematically articulates what parameter adjustments would have kept the activity within baseline.
+11. **Searchable Transaction Ledger**: Full table of all historical and recent customer transactions with export capabilities.
+12. **Reviewer Case Disposition Form**: Official human investigator sign-off with audit logging and action recording.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Backend**: Python 3.12, FastAPI, Uvicorn, SQLite3, Google GenAI SDK (`google-genai`), NumPy, Pydantic.
+- **Frontend**: React 18, Vite, Tailwind CSS, Lucide React, Recharts, Axios.
+- **Data Persistence**: SQLite (`database/transactionguard.db`) with dynamic schema migration and cryptographically sealed audit logging (`sha256`).
+- **Explainability**: Deterministic rules engine + Gemini 1.5 Flash grounded prompt synthesis.
+
+---
+
+## 📋 Repository Structure
+
+```
+TransactionGuard/
+├── app.py                         # Root FastAPI entrypoint (serves API & frontend/dist/)
+├── requirements.txt               # Root Python dependencies
+├── README.md                      # PS06 documentation & evaluation guide
+├── data/
+│   └── investigation_rules.md     # Mathematical specifications for 6 PS06 Risk Rules
+├── backend/
+│   ├── engine_ps06.py             # Deterministic PS06 behavioral & rules engine
+│   ├── gemini_grounding.py        # Grounded Gemini GenAI integration & fallback
+│   ├── synthetic_data_ps06.py     # 8 multi-month customer profiles generator
+│   └── database_ps06.py           # SQLite persistence layer & dynamic schema migrations
+├── database/
+│   └── transactionguard.db        # Pre-seeded SQLite database
+└── frontend/
+    ├── package.json
+    ├── vite.config.js
+    ├── dist/                      # Pre-compiled production frontend bundle
+    └── src/
+        ├── App.jsx                # Router & role authentication shell
+        ├── api/api.js             # Universal API client
+        ├── components/
+        │   ├── Navbar.jsx         # Navigation bar with Customer Investigation
+        │   └── Header.jsx         # Live telemetry header
+        └── pages/
+            ├── CustomerInvestigation.jsx  # Flagship PS06 Investigation Assistant
+            ├── Dashboard.jsx              # Executive governance command center
+            ├── Review.jsx                 # Human case review queue
+            ├── Analytics.jsx              # Risk distribution & metrics
+            ├── Transactions.jsx           # Universal transactions table
+            └── AuditPage.jsx              # Cryptographic audit ledger
+```
+
+---
+
+## ⚖️ License & Ethical AI Disclosure
+
+Built for **NexusTiq24 — Track PS06 (Banking: Transaction Risk Investigation Assistant)**.
+All customer identities and financial transactions within the synthetic dataset are entirely fictitious and engineered for algorithmic benchmark evaluation.
