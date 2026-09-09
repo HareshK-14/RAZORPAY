@@ -93,3 +93,42 @@ export async function investigateCustomPayload(data) {
   const res = await api.post('/investigate', data);
   return res.data;
 }
+
+export async function getCustomerRiskProfile(customerId) {
+  const res = await api.get(`/customers/${customerId}/profile`);
+  return res.data;
+}
+
+export async function getCopilotQuery(customerId, question) {
+  const res = await api.post('/copilot/query', { customer_id: customerId, question });
+  return res.data;
+}
+
+export async function explainableQuery(query, customerId) {
+  const res = await api.post('/investigate/query', { query, customer_id: customerId });
+  return res.data;
+}
+
+export async function getSimilarCases(customerId) {
+  const res = await api.get(`/cases/similar/${customerId}`);
+  return res.data;
+}
+
+export async function getRulesLibrary() {
+  const res = await api.get('/rules/library');
+  return res.data;
+}
+
+export async function getCommandCenterMetrics() {
+  const res = await api.get('/command-center/metrics');
+  return res.data;
+}
+
+export async function recordDisposition(data) {
+  const res = await api.post('/disposition', data);
+  return res.data;
+}
+
+export function getExportUrl(customerId, format = 'json') {
+  return `/api/export/${customerId}?format=${format}`;
+}

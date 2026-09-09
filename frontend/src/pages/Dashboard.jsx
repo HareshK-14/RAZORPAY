@@ -5,6 +5,7 @@ import { getMetrics, getHealth, getTransactions } from '../api/api';
 import StatCard from '../components/StatCard';
 import RiskBadge from '../components/RiskBadge';
 import TransactionDrawer from '../components/TransactionDrawer';
+import RiskOperationsCenter from '../components/RiskOperationsCenter';
 import axios from 'axios';
 import {
   AlertTriangle,
@@ -267,6 +268,9 @@ export default function Dashboard() {
           <ChevronRight className="w-4 h-4 text-blue-500" />
         </button>
       </div>
+
+      {/* RISK OPERATIONS COMMAND CENTER VIEW */}
+      <RiskOperationsCenter />
 
       {/* DEDICATED ROLE DASHBOARD VIEW */}
       {currentRole === 'Administrator' && (

@@ -122,8 +122,14 @@ export default function Header() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/transactions?search=${encodeURIComponent(searchQuery.trim())}`);
+    const q = searchQuery.trim();
+    if (q) {
+      if (q.toUpperCase().startsWith('CUST-') || q.toUpperCase().includes('CUST')) {
+        const matchedId = q.match(/CUST-[A-Za-z0-9_-]+/i)?.[0]?.toUpperCase() || q.toUpperCase();
+        navigate(`/customer-investigation?id=${encodeURIComponent(matchedId)}`);
+      } else {
+        navigate(`/transactions?search=${encodeURIComponent(q)}`);
+      }
       setShowSearch(false);
       setSearchQuery('');
     }

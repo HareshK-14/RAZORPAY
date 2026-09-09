@@ -2,7 +2,6 @@ TRACK_ID=PS6
 
 # 🛡️ TransactionGuard AI
 ### Banking: Transaction Risk Investigation Assistant
-
 > *"Find the pattern. Show the evidence. Keep the decision human."*
 
 [![Competition Track](https://img.shields.io/badge/Competition_Track-NexusTiq24_PS06-blue.svg)](https://github.com/HareshK-14/RAZORPAY)
@@ -15,11 +14,11 @@ TRACK_ID=PS6
 
 ## 🏛️ Executive Summary & Primary Objective
 
-**TransactionGuard AI** is a specialized banking transaction risk investigation assistant built for **NexusTiq24 Problem Statement PS06: Banking - Transaction Risk Investigation Assistant**.
+**TransactionGuard AI** is an explainable AI transaction risk investigation platform built for **NexusTiq24 Problem Statement PS06: Banking - Transaction Risk Investigation Assistant** and designed for modern banking/payment risk operations.
 
-In modern banking operations, fraud analysts and human reviewers are overwhelmed by millions of daily transactions. Opaque machine learning models output arbitrary risk numbers without evidence or justification, creating "alert fatigue" and legal liabilities.
+In high-volume banking operations, fraud analysts and human reviewers are overwhelmed by millions of daily transactions. Opaque machine learning models output arbitrary risk numbers without evidence or justification, creating severe alert fatigue and legal liabilities.
 
-TransactionGuard AI solves this by operating as a **court-defensible, human-in-the-loop investigation assistant**. It answers one primary question unequivocally:
+TransactionGuard AI solves this by operating as a **court-defensible, human-in-the-loop investigation workspace**. It answers one primary question unequivocally:
 
 > ### **"Does anything in this customer's transaction history need attention?"**
 > - **`YES — INVESTIGATION RECOMMENDED`** (Surfaces exact pattern shifts, triggered rules, and court-admissible evidence chains)
@@ -30,13 +29,20 @@ TransactionGuard AI solves this by operating as a **court-defensible, human-in-t
 ## ⚠️ Core Defensibility & Safety Mandate
 
 > ### **NEVER ASSERT FRAUD**
-> **"The system is designed exclusively for behavioral anomaly detection, risk assessment, explanation, and human-review assistance. It NEVER asserts that 'fraud has occurred' or that a customer is guilty. It surfaces mathematical departures, extracts evidence, cites deterministic banking rules, and reserves final judgment strictly for authorized human investigators."**
+> **"The system is designed exclusively for behavioral anomaly detection, risk explanation, connected activity clustering, and human-review assistance. It NEVER asserts that 'fraud has occurred' or that a customer is guilty. It surfaces mathematical departures, extracts evidence, cites deterministic banking rules, and reserves final judgment strictly for authorized human investigators."**
+
+Approved non-accusatory terminology:
+- `Investigation Recommended`
+- `Elevated Risk Activity`
+- `Unusual Pattern Detected`
+- `Needs Attention`
+- `Human Review Recommended`
 
 ---
 
 ## 🚀 Quickstart for Evaluation Judges
 
-The entire platform is self-contained. The evaluation judge runs **only two commands** in a single terminal. **No Node.js or second terminal is required by the judge**.
+The entire platform is self-contained. The evaluation judge runs **only two commands** in a single terminal:
 
 ### 1. Installation
 ```bash
@@ -55,74 +61,116 @@ http://localhost:8000
 
 > **Single-Port Architecture**: Python FastAPI serves both the high-performance REST APIs (`/api/*`) and the compiled production frontend (`frontend/dist/index.html`) on `http://localhost:8000`.
 
-### Optional Gemini Configuration
-If you have a Google Gemini API Key:
+### Local Development Mode
+For local development with live reload:
 ```bash
-# Windows PowerShell
-$env:GEMINI_API_KEY="your_api_key_here"
-
-# Linux / macOS
-export GEMINI_API_KEY="your_api_key_here"
+npm run dev
 ```
-> **Graceful Fallback**: If `GEMINI_API_KEY` is not provided or network access is restricted, the engine automatically switches to its **100% deterministic rule-grounded narrative engine** with zero degradation in analytical depth or uptime.
+Starts both the Python backend on `http://localhost:8000` and Vite dev server on `http://localhost:5173` via a single command.
 
 ---
 
-## 🧠 The 6 Deterministic PS06 Risk Rules
+## 🧠 Key Features & Architectural Innovations
 
-Every customer transaction is evaluated against 6 deterministic banking rules codified with mathematical thresholds in `data/investigation_rules.md`:
+### 1. Smart Case Summary Card
+Every customer case features a single executive card displaying:
+- **Case Status**: `YES — INVESTIGATION RECOMMENDED` or `NO SIGNIFICANT UNUSUAL ACTIVITY`
+- **Attention Score**: Deterministic composite score (0–100)
+- **Evidence Confidence**: Verification confidence (e.g. 94%)
+- **Triggered Rules**: Number of triggered deterministic rules
+- **Connected Transactions**: Relevant transactions isolated
+- **Behaviour Shift**: Temporal deviation flag
+- **Human Review**: Mandatory investigator requirement
+
+### 2. Customer Risk Profile
+Persistent customer investigation profile summarizing:
+- Account age, typical transaction amount, typical daily frequency, habitual active hours, known payees count, common channels, open cases, and previous reviews.
+
+### 3. Adaptive Baseline Calculation
+Evaluates customer spending across multiple temporal horizons:
+- Long-term 90-day baseline vs. Recent 7-day baseline vs. Current batch.
+- Flags `BASELINE CHANGE DETECTED` (e.g. 4.46x upward shift) without prematurely declaring fraud, letting deterministic rules evaluate if investigation is required.
+
+### 4. "Why This Needs Attention" — Risk Explainability Stack
+Dedicated 6-step transparent panel:
+1. **What changed?** (Velocity spike, off-hour beneficiary addition)
+2. **Which rule triggered?** (Exact PS06 rule citations)
+3. **Which transactions are involved?** (Specific transaction IDs and amounts)
+4. **How different from normal?** (Comparative deviation multiples)
+5. **How strong is the evidence?** (Data completeness and citation strength)
+6. **What remains unknown?** (Customer intent, external contract existence)
+
+### 5. Investigation Copilot (Analyst AI Assistant)
+Interactive Copilot allowing analysts to ask natural-language questions:
+- *"What changed recently?"*
+- *"Why is this customer being investigated?"*
+- *"Show the transactions responsible."*
+- *"Compare current behaviour with previous month."*
+- *"What should I check first?"*
+- Answers strictly from local transaction data and rules with structured output:
+  $$\text{Question} \rightarrow \text{Interpretation} \rightarrow \text{Data Used} \rightarrow \text{Findings} \rightarrow \text{Evidence}$$
+- Guaranteed **zero hallucination** and automatic deterministic fallback.
+
+### 6. Investigation Graph & Pattern Clustering
+- **Investigation Graph**: Maps funds flow across Customer $\rightarrow$ Transactions $\rightarrow$ Payees, Channels, and Devices with highlighted *connected activity clusters*.
+- **Pattern Clustering**: Groups transactions into discrete behavioral patterns (e.g. Pattern 01: nocturnal rapid burst; Pattern 02: routine daytime groceries).
+
+### 7. Temporal Change Detection (Customer Behaviour Evolution)
+Three-phase timeline reconstruction:
+- **Phase 1: Before** (Stable established spending envelope)
+- **Phase 2: Change Event** (New beneficiary addition timestamp)
+- **Phase 3: After** (High-value rapid outflow transfers)
+
+### 8. Investigation Priority Engine
+Deterministic calculation of priority (`URGENT`, `HIGH`, `MEDIUM`, `LOW`):
+$$\text{Priority} = f(\text{deviation\_magnitude}, \text{rules\_count}, \text{connected\_txns}, \text{confidence}, \text{recency})$$
+
+### 9. Case Similarity Engine
+Matches current customer patterns against historical synthetic cases:
+- `CASE-102` (88% match: nocturnal rapid IMPS drain)
+- `CASE-214` (76% match: rapid account drain)
+- Surfacing historical dispositions and investigator takeaways.
+
+### 10. Uncertainty Center & Responsible AI
+Explicitly surfaces where evidence is incomplete or ambiguous, data completeness %, baseline strength, and material unknown factors.
+
+### 11. Smart Evidence Pack & Export
+Generates downloadable, court-defensible investigation packages in:
+- **JSON**: Machine-readable full investigation payload.
+- **HTML**: Standalone printable executive dossier.
+- **CSV**: Filtered ledger of connected transactions.
+
+### 12. Investigator Feedback Loop
+Human reviewer dispositions recorded in tamper-evident SQLite audit logs:
+- `Confirmed Explained Activity`
+- `Needs Further Review`
+- `No Material Concern`
+- `Escalated`
+
+---
+
+## ⚖️ The 6 Deterministic PS06 Risk Rules
 
 | Rule ID | Rule Name | Core Category | Deterministic Detection Threshold |
 |---|---|---|---|
-| **RULE_PS06_01** | **New Payee Velocity Spike** | Beneficiary Exposure | $\ge 2$ transfers to previously unseen payees within 24 hours OR $\ge 3	imes$ daily transaction burst to a new beneficiary. |
-| **RULE_PS06_02** | **Sudden High-Value Deviation** | Amount Divergence | Transaction amount $> (	ext{Mean}_{90	ext{d}} + 3 	imes 	ext{StdDev}_{90	ext{d}})$ AND amount $> ₹50,000$. |
-| **RULE_PS06_03** | **Atypical Nocturnal Activity** | Circadian Anomaly | Transaction executed between 23:00 and 06:00 for a customer whose baseline nocturnal activity is $< 5\%$. |
-| **RULE_PS06_04** | **Rapid Channel Switching** | Payment Channel | Sudden departure into an unused channel (e.g. Wire Transfer/ATM) for an amount $> 2	imes$ historical average. |
-| **RULE_PS06_05** | **Dormant Account Sudden Reactivation**| Account Velocity | Account inactive for $> 45$ days immediately executing high-velocity or high-value outbound transfers. |
-| **RULE_PS06_06** | **Structuring / Smurfing Pattern** | AML Regulatory | $\ge 3$ consecutive transactions within 12 hours sized just below standard reporting thresholds ($₹45,000 - ₹49,999$). |
+| **RULE-NEW-PAYEE-BURST** | **Rapid Outflow After Payee Addition** | Beneficiary Exposure | Transfer initiated within 2 hours of beneficiary registration. |
+| **RULE-LARGE-TRANSFER** | **High-Value Transfer Deviation** | Amount Divergence | Amount $> 3.5\times$ customer mean AND $> \text{mean} + 2.5 \text{ StdDev}$. |
+| **RULE-RAPID-VELOCITY** | **Unusual Transaction Frequency Burst** | Frequency Spike | $\ge 3$ transactions within a 60-minute sliding window. |
+| **RULE-ODD-HOURS** | **Circadian Rhythm Deviation** | Circadian Anomaly | Outbound transfer between 23:00 and 05:00 for daytime transactors. |
+| **RULE-CHANNEL-ANOMALY** | **Atypical Payment Channel Switching** | Channel Anomaly | Channel rarely used ($<10\%$ in history) combined with elevated amount. |
+| **RULE-ROUND-AMOUNT** | **Structured Round Amount Pattern** | Structuring Pattern | Exact multiple of ₹5,000 and $> ₹10,000$. |
 
 ---
 
-## 📊 Synthetic Benchmark Dataset & Case Breakdown
+## 🔮 Future Innovation Roadmap
 
-TransactionGuard AI includes a pre-seeded multi-month banking dataset (`backend/synthetic_data_ps06.py`) featuring 8 customer profiles and over 340 realistic transactions across 90-day baselines:
-
-### 1. Standard Benchmark Cases
-- **`CUST-NORMAL-001` (Normal Retail Customer)**
-  - 45 daily retail transactions (UPI, grocery, utilities, standard hours).
-  - **Verdict**: `NO SIGNIFICANT UNUSUAL ACTIVITY` (0 rules triggered).
-- **`CUST-RISK-001` (High-Risk Difficult Case)**
-  - Established salaried baseline followed by an overnight burst to 2 new beneficiaries (`Beneficiary_X_482`, `Mule_Acct_910`) totaling ₹2,85,000 via IMPS.
-  - **Verdict**: `YES — INVESTIGATION RECOMMENDED` (5 rules triggered: RULE_PS06_01, 02, 03, 04, 06). Isolates transactions `TX1001`, `TX1002`, `TX1003`.
-
-### 2. Difficult & Ambiguous Real-World Banking Scenarios
-- **`CUST-AMBIG-001` (Case A: Large Monthly Commercial Lease)**
-  - Legitimate recurring commercial lease payment occurring on the 1st of the month.
-- **`CUST-AMBIG-002` (Case B: High-Frequency Metro Transit Micropayments)**
-  - Rapid series of sub-₹100 transit NFC taps during peak commuting hours.
-- **`CUST-AMBIG-003` (Case C: International SaaS Cloud Subscription)**
-  - USD denominated corporate cloud hosting charge billed periodically.
-- **`CUST-AMBIG-004` (Case D: Overnight Emergency Pharmacy POS)**
-  - Atypical 02:30 AM transaction at a registered hospital/pharmacy POS terminal during a medical emergency.
-
----
-
-## 🧩 Comprehensive Feature Matrix (12 Investigation Views)
-
-The **Customer Investigation** module (`/customer-investigation`) equips human reviewers with 12 interconnected analytical panels:
-
-1. **Investigation Summary & Posture**: Instant determination of whether customer history requires attention.
-2. **Isolated Flagged Transactions**: Exact identification of anomalous transactions with amount divergence ratios.
-3. **Customer Behavioral DNA**: Side-by-side comparison of 90-day baseline vs. recent window (amount mean/std, daily velocity, nocturnal ratio, channel distribution).
-4. **Pattern Shift Timeline**: Chronological event mapping marking the precise moment customer behavior diverged.
-5. **Deterministic Rules Evaluation**: Full breakdown of all 6 PS06 rules with thresholds and pass/fail states.
-6. **Court-Admissible Evidence Chain**: Step-by-step audit trail linking historical baseline norms to anomalous deltas.
-7. **Grounded Gemini AI Briefing**: Zero-hallucination natural language executive summary citing verified transaction IDs and amounts.
-8. **Investigator Inquiry Protocol**: Pre-formulated targeted interview questions for customer phone verification.
-9. **Activity Relationship Map**: Visual graph of funds flow across counterparties, payees, and channels.
-10. **Counterfactual Analysis**: Mathematically articulates what parameter adjustments would have kept the activity within baseline.
-11. **Searchable Transaction Ledger**: Full table of all historical and recent customer transactions with export capabilities.
-12. **Reviewer Case Disposition Form**: Official human investigator sign-off with audit logging and action recording.
+| Phase | Horizon | Focus Area | Status | Key Deliverables |
+|---|---|---|---|---|
+| **Phase 1** | Immediate | **Enhanced Behavioural Baselines** | **IMPLEMENTED** | Adaptive baselines (90d vs 7d), Customer Risk Profile, Circadian active windows, Normal Case Guarantee. |
+| **Phase 2** | Immediate | **Investigation Graph & Clustering** | **IMPLEMENTED** | Entity graph mapping, Pattern clustering, Temporal evolution (Before/Change/After), Priority engine. |
+| **Phase 3** | Immediate | **Investigator Copilot & Explainability** | **IMPLEMENTED** | Grounded Copilot assistant, 6-step Explainability Stack, Explainable query mode, Rule library modal. |
+| **Phase 4** | Immediate | **Case Similarity & Human Feedback** | **IMPLEMENTED** | Pattern similarity matching, Non-accusatory reviewer dispositions, Smart Evidence Pack export (HTML/JSON/CSV). |
+| **Phase 5** | Future Vision | **Enterprise Risk Operations Integration** | *Planned Concept* | Multi-tenant core banking webhooks, Kafka streaming event-sinks, federated learning on anonymized baseline shifts, and cross-institution beneficiary reputation networks. |
 
 ---
 
@@ -131,44 +179,7 @@ The **Customer Investigation** module (`/customer-investigation`) equips human r
 - **Backend**: Python 3.12, FastAPI, Uvicorn, SQLite3, Google GenAI SDK (`google-genai`), NumPy, Pydantic.
 - **Frontend**: React 18, Vite, Tailwind CSS, Lucide React, Recharts, Axios.
 - **Data Persistence**: SQLite (`database/transactionguard.db`) with dynamic schema migration and cryptographically sealed audit logging (`sha256`).
-- **Explainability**: Deterministic rules engine + Gemini 1.5 Flash grounded prompt synthesis.
-
----
-
-## 📋 Repository Structure
-
-```
-TransactionGuard/
-├── app.py                         # Root FastAPI entrypoint (serves API & frontend/dist/)
-├── requirements.txt               # Root Python dependencies
-├── README.md                      # PS06 documentation & evaluation guide
-├── data/
-│   └── investigation_rules.md     # Mathematical specifications for 6 PS06 Risk Rules
-├── backend/
-│   ├── engine_ps06.py             # Deterministic PS06 behavioral & rules engine
-│   ├── gemini_grounding.py        # Grounded Gemini GenAI integration & fallback
-│   ├── synthetic_data_ps06.py     # 8 multi-month customer profiles generator
-│   └── database_ps06.py           # SQLite persistence layer & dynamic schema migrations
-├── database/
-│   └── transactionguard.db        # Pre-seeded SQLite database
-└── frontend/
-    ├── package.json
-    ├── vite.config.js
-    ├── dist/                      # Pre-compiled production frontend bundle
-    └── src/
-        ├── App.jsx                # Router & role authentication shell
-        ├── api/api.js             # Universal API client
-        ├── components/
-        │   ├── Navbar.jsx         # Navigation bar with Customer Investigation
-        │   └── Header.jsx         # Live telemetry header
-        └── pages/
-            ├── CustomerInvestigation.jsx  # Flagship PS06 Investigation Assistant
-            ├── Dashboard.jsx              # Executive governance command center
-            ├── Review.jsx                 # Human case review queue
-            ├── Analytics.jsx              # Risk distribution & metrics
-            ├── Transactions.jsx           # Universal transactions table
-            └── AuditPage.jsx              # Cryptographic audit ledger
-```
+- **Explainability**: Deterministic rules engine + Gemini 1.5 Flash grounded prompt synthesis + Local Copilot.
 
 ---
 

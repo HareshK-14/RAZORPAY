@@ -1,4 +1,4 @@
-﻿"""
+"""
 Synthetic Banking Transaction Data Generator for Track PS06
 NexusTiq24 — Banking: Transaction Risk Investigation Assistant
 Generates multi-month realistic histories including clean baselines,
@@ -326,7 +326,64 @@ def generate_multi_month_history():
     }
 
     # -------------------------------------------------------------
-    # 6. Additional diverse customer accounts (CUST-1024, CUST-2048, etc.)
+    # 6. CUST-AMBIG-004: Difficult Case 4 — Multiple Moderate Deviations
+    # Moderate velocity bump + moderate amount deviation + new secondary payee
+    # -------------------------------------------------------------
+    c6_txns = []
+    for days_ago in range(60, 2, -1):
+        if random.random() < 0.5:
+            payee = random.choice(KNOWN_NORMAL_PAYEES)
+            tx_counter += 1
+            amount = round(random.uniform(700, 3500), 2)
+            c6_txns.append({
+                "transaction_id": f"TX{tx_counter}",
+                "customer_id": "CUST-AMBIG-004",
+                "timestamp": generate_timestamp(base_date, days_ago, random.randint(10, 20), random.randint(0, 59)),
+                "amount": amount,
+                "currency": "INR",
+                "payee": payee["name"],
+                "merchant_category": payee["category"],
+                "channel": "UPI",
+                "payee_added_date": (base_date - datetime.timedelta(days=100)).strftime("%Y-%m-%d"),
+                "location": "Ahmedabad, IN",
+                "device_id": "DEV-MOTO-C6",
+                "balance_after_transaction": 120000.00,
+                "description": f"Retail payment {payee['name']}"
+            })
+    # Multiple moderate deviations within 48h
+    mod_payee_time = "2026-03-12 18:00:00"
+    for i, (amt, ts) in enumerate([
+        (11500.00, "2026-03-13 22:15:00"),
+        (12800.00, "2026-03-13 22:45:00"),
+        (9800.00, "2026-03-13 23:20:00")
+    ]):
+        c6_txns.append({
+            "transaction_id": f"TX101{i+1}",
+            "customer_id": "CUST-AMBIG-004",
+            "timestamp": ts,
+            "amount": amt,
+            "currency": "INR",
+            "payee": "Apex Wholesale Merchants",
+            "merchant_category": "Commercial Goods",
+            "channel": "NET_BANKING",
+            "payee_added_date": mod_payee_time,
+            "location": "Ahmedabad, IN",
+            "device_id": "DEV-MOTO-C6",
+            "balance_after_transaction": 120000.00 - ((i+1) * 11000),
+            "description": "Commercial supply invoice settlement"
+        })
+    c6_txns.sort(key=lambda x: x["timestamp"])
+    customers_data["CUST-AMBIG-004"] = {
+        "customer_id": "CUST-AMBIG-004",
+        "customer_name": "Arjun Singhal",
+        "account_type": "Current Account Enterprise",
+        "case_type": "AMBIGUOUS_MODERATE",
+        "description": "Multiple moderate deviations: slight velocity bump, elevated amount, and edge-of-hours settlement.",
+        "transactions": c6_txns
+    }
+
+    # -------------------------------------------------------------
+    # 7. Additional diverse customer accounts (CUST-1024, CUST-2048, etc.)
     # -------------------------------------------------------------
     for cid, cname in [("CUST-1024", "Aditya Joshi"), ("CUST-2048", "Kavita Rao"), ("CUST-3090", "Deepak Nair")]:
         c_txns = []

@@ -3,8 +3,22 @@ import { useSearchParams } from 'react-router-dom';
 import {
   getCustomerInvestigation,
   getCustomers,
-  investigateCustomPayload
+  investigateCustomPayload,
+  recordDisposition,
+  getExportUrl
 } from '../api/api';
+import SmartCaseSummary from '../components/SmartCaseSummary';
+import CustomerRiskProfileCard from '../components/CustomerRiskProfileCard';
+import AdaptiveBaselineCard from '../components/AdaptiveBaselineCard';
+import ExplainabilityStack from '../components/ExplainabilityStack';
+import InvestigationCopilot from '../components/InvestigationCopilot';
+import PatternClusteringView from '../components/PatternClusteringView';
+import TemporalEvolutionView from '../components/TemporalEvolutionView';
+import CaseSimilarityCard from '../components/CaseSimilarityCard';
+import UncertaintyCenterCard from '../components/UncertaintyCenterCard';
+import InvestigationReplayModal from '../components/InvestigationReplayModal';
+import CustomerComparisonModal from '../components/CustomerComparisonModal';
+import RuleLibraryModal from '../components/RuleLibraryModal';
 import {
   ShieldAlert, ShieldCheck, AlertTriangle, Clock, Dna, Layers,
   Sparkles, HelpCircle, Network, ClipboardCheck, CheckCircle2,
@@ -35,7 +49,10 @@ export default function CustomerInvestigation() {
   const [customJsonModal, setCustomJsonModal] = useState(false);
   const [customPayloadText, setCustomPayloadText] = useState('');
   
-  const [dispositionAction, setDispositionAction] = useState('Verified Legitimate with Customer');
+  const [dispositionAction, setDispositionAction] = useState('Needs Further Review');
+  const [replayModalOpen, setReplayModalOpen] = useState(false);
+  const [compareModalOpen, setCompareModalOpen] = useState(false);
+  const [rulesModalOpen, setRulesModalOpen] = useState(false);
   const [dispositionNotes, setDispositionNotes] = useState('');
   const [dispositionSaved, setDispositionSaved] = useState(false);
 
@@ -76,10 +93,20 @@ export default function CustomerInvestigation() {
     }
   };
 
-  const handleSaveDisposition = (e) => {
+  const handleSaveDisposition = async (e) => {
     e.preventDefault();
-    setDispositionSaved(true);
-    setTimeout(() => setDispositionSaved(false), 4000);
+    try {
+      await recordDisposition({
+        customer_id: selectedCustomerId,
+        action: dispositionAction,
+        notes: dispositionNotes,
+        reviewer: 'Risk Analyst'
+      });
+      setDispositionSaved(true);
+      setTimeout(() => setDispositionSaved(false), 4000);
+    } catch (err) {
+      alert('Failed to save disposition: ' + err.message);
+    }
   };
 
   const needsAttention = investigationData?.needs_attention ?? false;
@@ -151,6 +178,40 @@ export default function CustomerInvestigation() {
         </span>
       </div>
 
+      {/* Quick Action & Export Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-white px-5 py-3 rounded-2xl border border-slate-200/80 shadow-xs text-xs">
+        <div className="flex items-center gap-2">
+          <span className="font-bold text-slate-700">Export Smart Evidence Pack:</span>
+          <a
+            href={getExportUrl(selectedCustomerId, 'json')}
+            download
+            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-slate-700 transition-colors"
+          >
+            JSON
+          </a>
+          <a
+            href={getExportUrl(selectedCustomerId, 'html')}
+            target="_blank"
+            rel="noreferrer"
+            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-slate-700 transition-colors"
+          >
+            HTML View
+          </a>
+          <a
+            href={getExportUrl(selectedCustomerId, 'csv')}
+            download
+            className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 font-bold text-slate-700 transition-colors"
+          >
+            CSV
+          </a>
+        </div>
+        <div className="flex items-center gap-2 text-slate-500">
+          <span>Engine: <strong className="text-slate-800 font-mono">{investigationData?.engine_version || 'TransactionGuard-v2'}</strong></span>
+          <span>•</span>
+          <span>Rule Set: <strong className="text-slate-800 font-mono">PS6-Rules-v1</strong></span>
+        </div>
+      </div>
+
       {loading && (
         <div className="bg-white p-12 rounded-2xl border border-slate-200 text-center space-y-3">
           <RefreshCw className="w-8 h-8 text-blue-600 animate-spin mx-auto" />
@@ -171,6 +232,12 @@ export default function CustomerInvestigation() {
 
       {!loading && investigationData && (
         <>
+          <SmartCaseSummary
+            investigationData={investigationData}
+            onOpenReplay={() => setReplayModalOpen(true)}
+            onOpenCompare={() => setCompareModalOpen(true)}
+            onOpenRules={() => setRulesModalOpen(true)}
+          />
           <div className={'p-6 rounded-2xl border-2 transition-all shadow-sm ' + (
             needsAttention
               ? 'bg-rose-50/70 border-rose-300 text-rose-950'
@@ -263,6 +330,11 @@ export default function CustomerInvestigation() {
           <div className="border-b border-slate-200 flex items-center gap-1 overflow-x-auto pb-1">
             {[
               { id: 'overview', label: 'Investigation Summary', icon: FileText, badge: null },
+              { id: 'copilot', label: 'Investigation Copilot', icon: Sparkles, badge: 'AI' },
+              { id: 'patterns', label: 'Pattern Clustering', icon: Layers, badge: investigationData.pattern_clusters?.length || null },
+              { id: 'evolution', label: 'Behaviour Evolution', icon: Clock, badge: null },
+              { id: 'similarity', label: 'Similar Cases', icon: Activity, badge: investigationData.similar_cases?.length || null },
+              { id: 'uncertainty', label: 'Uncertainty Center', icon: HelpCircle, badge: null },
               { id: 'flagged', label: 'Flagged Activity', icon: ShieldAlert, badge: flaggedTxs.length },
               { id: 'dna', label: 'Behavioral DNA', icon: Dna, badge: null },
               { id: 'timeline', label: 'Pattern Shift Timeline', icon: Clock, badge: timeline.length },
@@ -304,6 +376,22 @@ export default function CustomerInvestigation() {
 
           {activeTab === 'overview' && (
             <div className="space-y-6">
+              {/* Customer Risk Profile & Adaptive Baseline Row */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <CustomerRiskProfileCard
+                  profile={investigationData.customer_risk_profile}
+                  customerName={investigationData.customer_name}
+                  accountType={investigationData.account_type}
+                />
+                <AdaptiveBaselineCard
+                  adaptiveBaseline={investigationData.adaptive_baseline}
+                />
+              </div>
+
+              {/* Dedicated 6-Step Explainability Stack */}
+              <ExplainabilityStack
+                stack={investigationData.explainability_stack}
+              />
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
                   <div className="flex items-center justify-between">
@@ -398,6 +486,37 @@ export default function CustomerInvestigation() {
                 </div>
               )}
             </div>
+          )}
+
+                    {activeTab === 'copilot' && (
+            <InvestigationCopilot
+              customerId={selectedCustomerId}
+              report={investigationData}
+            />
+          )}
+
+          {activeTab === 'patterns' && (
+            <PatternClusteringView
+              clusters={investigationData.pattern_clusters}
+            />
+          )}
+
+          {activeTab === 'evolution' && (
+            <TemporalEvolutionView
+              evolution={investigationData.temporal_evolution}
+            />
+          )}
+
+          {activeTab === 'similarity' && (
+            <CaseSimilarityCard
+              similarCases={investigationData.similar_cases}
+            />
+          )}
+
+          {activeTab === 'uncertainty' && (
+            <UncertaintyCenterCard
+              uncertainty={investigationData.uncertainty_analysis}
+            />
           )}
 
           {activeTab === 'flagged' && (
@@ -968,11 +1087,10 @@ export default function CustomerInvestigation() {
                     onChange={(e) => setDispositionAction(e.target.value)}
                     className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
-                    <option value="Verified Legitimate with Customer">Verified Legitimate with Customer (False Positive Departure)</option>
-                    <option value="Escalate to L2 Anti-Fraud Team">Escalate to L2 Anti-Fraud Team</option>
-                    <option value="Request Invoice & Counterparty Proof">Request Invoice & Counterparty Proof</option>
-                    <option value="Place Temporary Hold on Outbound Transfers">Place Temporary Hold on Outbound Transfers</option>
-                    <option value="Close Investigation — No Action Needed">Close Investigation — No Action Needed</option>
+                    <option value="Confirmed Explained Activity">Confirmed Explained Activity (Legitimate Context Confirmed)</option>
+                    <option value="Needs Further Review">Needs Further Review (Phone/ID Corroboration Required)</option>
+                    <option value="No Material Concern">No Material Concern (Standard Account Behavior)</option>
+                    <option value="Escalated">Escalated (Forwarded to Senior Risk Operations)</option>
                   </select>
                 </div>
 
@@ -1006,6 +1124,25 @@ export default function CustomerInvestigation() {
           )}
         </>
       )}
+
+      {/* Modals for Replay, Comparison, and Rules */}
+      <InvestigationReplayModal
+        isOpen={replayModalOpen}
+        onClose={() => setReplayModalOpen(false)}
+        customerId={selectedCustomerId}
+      />
+
+      <CustomerComparisonModal
+        isOpen={compareModalOpen}
+        onClose={() => setCompareModalOpen(false)}
+        currentCustomer={selectedCustomerId}
+        currentData={investigationData}
+      />
+
+      <RuleLibraryModal
+        isOpen={rulesModalOpen}
+        onClose={() => setRulesModalOpen(false)}
+      />
 
       {customJsonModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
