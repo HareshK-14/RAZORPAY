@@ -2,7 +2,7 @@ TRACK_ID=PS6
 
 # 🛡️ TransactionGuard AI
 ### Banking: Transaction Risk Investigation Assistant  
-> *"Find the pattern. Show the evidence. Keep the decision human."*   
+> *"Find the pattern. Show the evidence. Keep the decision human."*  
 
 [![Competition Track](https://img.shields.io/badge/Competition_Track-NexusTiq24_PS06-blue.svg)](https://github.com/HareshK-14/RAZORPAY)
 [![Execution Model](https://img.shields.io/badge/Run_Command-python_app.py-emerald.svg)](https://github.com/HareshK-14/RAZORPAY)
