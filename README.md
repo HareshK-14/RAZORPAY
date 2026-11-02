@@ -26,7 +26,7 @@ TransactionGuard AI solves this by operating as a **court-defensible, human-in-t
 
 ---
 
-## ⚠️ Core Defensibility & Safety Mandate
+## ⚠️ Core Defensibility & Safety Mandate 
 
 > ### **NEVER ASSERT FRAUD**
 > **"The system is designed exclusively for behavioral anomaly detection, risk explanation, connected activity clustering, and human-review assistance. It NEVER asserts that 'fraud has occurred' or that a customer is guilty. It surfaces mathematical departures, extracts evidence, cites deterministic banking rules, and reserves final judgment strictly for authorized human investigators."**
