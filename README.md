@@ -12,7 +12,7 @@ TRACK_ID=PS6
 
 ---
 
-## 🏛️ Executive Summary & Primary Objective 
+## 🏛️ Executive Summary & Primary Objective
 
 **TransactionGuard AI** is an explainable AI transaction risk investigation platform built for **NexusTiq24 Problem Statement PS06: Banking - Transaction Risk Investigation Assistant** and designed for modern banking/payment risk operations.
 
